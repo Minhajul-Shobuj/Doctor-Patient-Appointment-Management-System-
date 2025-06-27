@@ -6,7 +6,7 @@ import sendResponse from "../../utils/sendResponse";
 
 const loginUser = catchAsync(async (req, res) => {
   const result = await AuthServices.loginUser(req.body);
-  const { refreshToken, accessToken, needsPasswordChange } = result;
+  const { refreshToken, accessToken } = result;
 
   res.cookie("refreshToken", refreshToken, {
     secure: config.NODE_ENV === "production",
@@ -19,7 +19,6 @@ const loginUser = catchAsync(async (req, res) => {
     message: "User is logged in succesfully!",
     data: {
       accessToken,
-      needsPasswordChange,
     },
   });
 });
@@ -48,32 +47,8 @@ const refreshToken = catchAsync(async (req, res) => {
   });
 });
 
-const forgetPassword = catchAsync(async (req, res) => {
-  const userId = req.body.id;
-  const result = await AuthServices.forgetPassword(userId);
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "Reset Password link generated succesfully!",
-    data: result,
-  });
-});
-
-const resetPassword = catchAsync(async (req, res) => {
-  const token = req.headers.authorization as string;
-  const result = await AuthServices.resetPassword(token, req.body);
-  sendResponse(res, {
-    statusCode: httpStatus.OK,
-    success: true,
-    message: "Succesfully reset your password!",
-    data: result,
-  });
-});
-
 export const AuthControllers = {
   loginUser,
   changePassword,
   refreshToken,
-  forgetPassword,
-  resetPassword,
 };
