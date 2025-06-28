@@ -20,6 +20,11 @@ const UserSchema = new Schema<IUser>(
       default: "user",
       required: true,
     },
+    status: {
+      type: String,
+      enum: ["active", "blocked"],
+      default: "active",
+    },
     isActive: {
       type: Boolean,
       default: true,

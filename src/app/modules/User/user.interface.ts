@@ -3,7 +3,7 @@ export type IUser = {
   email: string;
   password: string;
   role: UserRole;
-  status?: "active" | "blocked";
+  status: "active" | "blocked";
   isActive: boolean;
   isDeleted: boolean;
 };
