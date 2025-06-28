@@ -6,17 +6,16 @@ import { User } from "./user.model";
 import { Doctor } from "../Doctor/doctor.model";
 
 const createDoctor = async (payload: IDoctor) => {
-  const hashedPassword = await bcrypt.hash(
-    payload.password,
-    Number(config.bcrypt_salt_rounds)
-  );
   const session = await mongoose.startSession();
 
   try {
     session.startTransaction();
 
     // Hash password
-    const hashedPassword = await bcrypt.hash(payload.password, 10);
+    const hashedPassword = await bcrypt.hash(
+      payload.password,
+      Number(config.bcrypt_salt_rounds)
+    );
 
     // Create user record
     const userData = {

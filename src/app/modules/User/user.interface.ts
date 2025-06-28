@@ -1,5 +1,5 @@
 export type UserRole = "user" | "admin" | "superAdmin" | "doctor";
-export type IUser = {
+export type TUser = {
   email: string;
   password: string;
   role: UserRole;

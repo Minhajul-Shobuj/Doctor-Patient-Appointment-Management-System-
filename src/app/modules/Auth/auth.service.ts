@@ -32,14 +32,12 @@ const loginUser = async (payload: TLoginUser) => {
   if (userStatus === "blocked") {
     throw new AppError(httpStatus.FORBIDDEN, "This user is blocked ! !");
   }
-  const hashedPassword = await bcrypt.hash(
+  const isPasswordMatched = await bcrypt.compare(
     payload.password,
-    Number(config.bcrypt_salt_rounds)
+    user.password
   );
 
   //checking if the password is correct
-  const isPasswordMatched = user.password === hashedPassword;
-
   if (!isPasswordMatched)
     throw new AppError(httpStatus.FORBIDDEN, "Password do not matched");
 

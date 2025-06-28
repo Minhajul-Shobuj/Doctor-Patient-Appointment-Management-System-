@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
-import { IUser } from "./user.interface";
+import { TUser } from "./user.interface";
 
-const UserSchema = new Schema<IUser>(
+const UserSchema = new Schema<TUser>(
   {
     email: {
       type: String,
@@ -39,4 +39,4 @@ const UserSchema = new Schema<IUser>(
   }
 );
 
-export const User = model<IUser>("User", UserSchema);
+export const User = model<TUser>("User", UserSchema);
