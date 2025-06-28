@@ -3,6 +3,7 @@ import { TUser } from "./user.interface";
 
 const UserSchema = new Schema<TUser>(
   {
+    name: { type: String, required: true },
     email: {
       type: String,
       required: true,
@@ -10,6 +11,9 @@ const UserSchema = new Schema<TUser>(
       lowercase: true,
       trim: true,
     },
+    phone: { type: String, required: true },
+    age: { type: Number, required: true },
+    gender: { type: String, enum: ["male", "female", "other"], required: true },
     password: {
       type: String,
       required: true,
@@ -18,7 +22,6 @@ const UserSchema = new Schema<TUser>(
       type: String,
       enum: ["user", "admin", "superAdmin", "doctor"],
       default: "user",
-      required: true,
     },
     status: {
       type: String,

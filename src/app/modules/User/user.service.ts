@@ -4,6 +4,20 @@ import { IDoctor } from "../Doctor/doctor.interface";
 import bcrypt from "bcrypt";
 import { User } from "./user.model";
 import { Doctor } from "../Doctor/doctor.model";
+import { TUser } from "./user.interface";
+
+const createUser = async (payload: TUser) => {
+  const hashedPassword = await bcrypt.hash(
+    payload.password,
+    Number(config.bcrypt_salt_rounds)
+  );
+  const result = await User.create({
+    ...payload,
+    password: hashedPassword,
+  });
+  const { password, ...userWithoutPassword } = result.toObject();
+  return userWithoutPassword;
+};
 
 const createDoctor = async (payload: IDoctor) => {
   const session = await mongoose.startSession();
@@ -22,6 +36,8 @@ const createDoctor = async (payload: IDoctor) => {
       name: payload.name,
       email: payload.email,
       phone: payload.phone,
+      age: payload.age,
+      gender: payload.gender,
       password: hashedPassword,
       role: "doctor",
     };
@@ -65,4 +81,5 @@ const createDoctor = async (payload: IDoctor) => {
 
 export const UserService = {
   createDoctor,
+  createUser,
 };
