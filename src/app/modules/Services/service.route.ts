@@ -1,14 +1,25 @@
 import express from "express";
 import validateRequest from "../../middlewares/validateRequest";
-import { ServiceVAlidation } from "./service.validation";
+import { ServiceValidation } from "./service.validation";
 import { ServiceController } from "./service.controller";
+import auth from "../../middlewares/auth";
 
 const router = express.Router();
 
 router.post(
   "/services",
-  validateRequest(ServiceVAlidation.careateServiceSchema),
+  auth("doctor"),
+  validateRequest(ServiceValidation.careateServiceSchema),
   ServiceController.addService
 );
+
+router.patch(
+  "/services/:id",
+  auth("doctor"),
+  validateRequest(ServiceValidation.updateServiceSchema),
+  ServiceController.updateService
+);
+
+router.delete("/services/:id", auth("doctor"), ServiceController.deleteService);
 
 export const ServiceRoute = router;
