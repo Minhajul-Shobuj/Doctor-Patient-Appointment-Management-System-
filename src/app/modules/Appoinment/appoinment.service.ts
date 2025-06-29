@@ -83,6 +83,7 @@ const updateAppointmentStatus = async (
   if (!appointment) {
     throw new AppError(status.NOT_FOUND, "Appointment not found");
   }
+
   if (appointment.doctorId.toString() !== doctorId) {
     throw new AppError(
       status.UNAUTHORIZED,
@@ -90,10 +91,32 @@ const updateAppointmentStatus = async (
     );
   }
 
-  const result = await Appointment.updateOne(
-    { _id: appointmentId },
-    { appointmentStatus }
+  // 1. Update appointment status
+  const updatedAppointment = await Appointment.findByIdAndUpdate(
+    appointmentId,
+    { status: appointmentStatus },
+    { new: true }
   );
+
+  // If cancelled → make slot available again
+  if (appointmentStatus === "cancelled") {
+    const dayName = getDayNameFromDate(appointment.selectedDate);
+
+    await DoctorAvailability.updateOne(
+      {
+        doctorId: new mongoose.Types.ObjectId(doctorId),
+        serviceId: new mongoose.Types.ObjectId(appointment.serviceId),
+        day: dayName,
+      },
+      {
+        $addToSet: {
+          timeSlots: appointment.timeSlot,
+        },
+      }
+    );
+  }
+
+  return updatedAppointment;
 };
 
 export const AppointmentService = {
