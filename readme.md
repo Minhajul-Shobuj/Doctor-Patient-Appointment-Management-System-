@@ -49,28 +49,6 @@ A full-featured backend REST API for managing doctor registrations, patient appo
 | bcryptjs   | Password hashing  |
 | JWT        | Token-based auth  |
 
----
-
-## 📁 Folder Structure
-
-src/
-│
-├── modules/
-│ ├── auth/
-│ ├── doctor/
-│ ├── patient/
-│ ├── appointment/
-│ ├── service/
-│ └── availability/
-│
-├── utils/
-├── middlewares/
-├── config/
-└── app.ts
-└── server.ts
-
----
-
 ## 🛠 Setup & Run Locally
 
 ```bash
