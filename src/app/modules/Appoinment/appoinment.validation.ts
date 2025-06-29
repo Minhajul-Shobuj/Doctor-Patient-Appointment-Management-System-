@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from 'zod';
 
 const createAppointmentValidation = z.object({
   body: z.object({
@@ -14,7 +14,7 @@ const createAppointmentValidation = z.object({
 
 const updateAppointmentStatusValidation = z.object({
   body: z.object({
-    status: z.enum(["accepted", "cancelled", "completed"]),
+    status: z.enum(['accepted', 'cancelled', 'completed']),
   }),
 });
 

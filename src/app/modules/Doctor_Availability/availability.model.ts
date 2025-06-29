@@ -1,10 +1,10 @@
-import { model, Schema } from "mongoose";
-import { IAvailability } from "./availability.interface";
+import { model, Schema } from 'mongoose';
+import { IAvailability } from './availability.interface';
 
 const availabilitySchema = new Schema<IAvailability>(
   {
-    doctorId: { type: Schema.Types.ObjectId, ref: "Doctor", required: true },
-    serviceId: { type: Schema.Types.ObjectId, ref: "Service", required: true },
+    doctorId: { type: Schema.Types.ObjectId, ref: 'Doctor', required: true },
+    serviceId: { type: Schema.Types.ObjectId, ref: 'Service', required: true },
     day: { type: String, required: true },
     timeSlots: [
       {
@@ -13,9 +13,6 @@ const availabilitySchema = new Schema<IAvailability>(
       },
     ],
   },
-  { timestamps: true }
+  { timestamps: true },
 );
-export const DoctorAvailability = model<IAvailability>(
-  "DoctorAvailability",
-  availabilitySchema
-);
+export const DoctorAvailability = model<IAvailability>('DoctorAvailability', availabilitySchema);

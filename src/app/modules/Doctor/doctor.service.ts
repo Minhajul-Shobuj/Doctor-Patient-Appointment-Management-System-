@@ -1,17 +1,18 @@
-import mongoose from "mongoose";
-import { Doctor } from "./doctor.model";
-import { DoctorFilters } from "./doctor.interface";
+import mongoose from 'mongoose';
+import { Doctor } from './doctor.model';
+import { DoctorFilters } from './doctor.interface';
 
 const getAllDoctors = async (filters: DoctorFilters) => {
   const { hospitalName, specialization, serviceName } = filters;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const matchStage: any = {};
 
   if (hospitalName) {
-    matchStage.hospitalName = { $regex: hospitalName, $options: "i" };
+    matchStage.hospitalName = { $regex: hospitalName, $options: 'i' };
   }
 
   if (specialization) {
-    matchStage.specialization = { $regex: specialization, $options: "i" };
+    matchStage.specialization = { $regex: specialization, $options: 'i' };
   }
   const doctors = await Doctor.aggregate([
     // Apply doctor-level filters
@@ -20,10 +21,10 @@ const getAllDoctors = async (filters: DoctorFilters) => {
     // Join with services
     {
       $lookup: {
-        from: "services",
-        localField: "_id",
-        foreignField: "doctorId",
-        as: "services",
+        from: 'services',
+        localField: '_id',
+        foreignField: 'doctorId',
+        as: 'services',
       },
     },
 
@@ -34,13 +35,13 @@ const getAllDoctors = async (filters: DoctorFilters) => {
             $addFields: {
               services: {
                 $filter: {
-                  input: "$services",
-                  as: "service",
+                  input: '$services',
+                  as: 'service',
                   cond: {
                     $regexMatch: {
-                      input: "$$service.title",
+                      input: '$$service.title',
                       regex: serviceName,
-                      options: "i",
+                      options: 'i',
                     },
                   },
                 },
@@ -53,10 +54,10 @@ const getAllDoctors = async (filters: DoctorFilters) => {
     // Join with availabilities
     {
       $lookup: {
-        from: "doctoravailabilities",
-        localField: "_id",
-        foreignField: "doctorId",
-        as: "availabilities",
+        from: 'doctoravailabilities',
+        localField: '_id',
+        foreignField: 'doctorId',
+        as: 'availabilities',
       },
     },
     {
@@ -76,18 +77,18 @@ const getDoctorById = async (id: string) => {
     },
     {
       $lookup: {
-        from: "services",
-        localField: "_id",
-        foreignField: "doctorId",
-        as: "services",
+        from: 'services',
+        localField: '_id',
+        foreignField: 'doctorId',
+        as: 'services',
       },
     },
     {
       $lookup: {
-        from: "doctoravailabilities",
-        localField: "_id",
-        foreignField: "doctorId",
-        as: "availabilities",
+        from: 'doctoravailabilities',
+        localField: '_id',
+        foreignField: 'doctorId',
+        as: 'availabilities',
       },
     },
     {
@@ -98,7 +99,7 @@ const getDoctorById = async (id: string) => {
   ]);
 
   if (!doctor || doctor.length === 0) {
-    throw new Error("Doctor not found");
+    throw new Error('Doctor not found');
   }
 
   return doctor[0];

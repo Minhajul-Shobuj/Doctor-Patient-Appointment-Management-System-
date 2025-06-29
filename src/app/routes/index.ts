@@ -1,36 +1,36 @@
-import { Router } from "express";
-import { UserRoute } from "../modules/User/user.route";
-import { AuthRoute } from "../modules/Auth/auth.route";
-import { ServiceRoute } from "../modules/Services/service.route";
-import { availabilityRoute } from "../modules/Doctor_Availability/availability.route";
-import { DoctorRoute } from "../modules/Doctor/doctor.route";
-import { AppointmentRoute } from "../modules/Appoinment/appoinment.route";
+import { Router } from 'express';
+import { UserRoute } from '../modules/User/user.route';
+import { AuthRoute } from '../modules/Auth/auth.route';
+import { ServiceRoute } from '../modules/Services/service.route';
+import { availabilityRoute } from '../modules/Doctor_Availability/availability.route';
+import { DoctorRoute } from '../modules/Doctor/doctor.route';
+import { AppointmentRoute } from '../modules/Appoinment/appoinment.route';
 
 const router = Router();
 
 const moduleRoutes = [
   {
-    path: "/auth",
+    path: '/auth',
     route: UserRoute,
   },
   {
-    path: "/auth",
+    path: '/auth',
     route: AuthRoute,
   },
   {
-    path: "/doctor",
+    path: '/doctor',
     route: ServiceRoute,
   },
   {
-    path: "/doctor",
+    path: '/doctor',
     route: availabilityRoute,
   },
   {
-    path: "/doctors",
+    path: '/doctors',
     route: DoctorRoute,
   },
   {
-    path: "/",
+    path: '/',
     route: AppointmentRoute,
   },
 ];

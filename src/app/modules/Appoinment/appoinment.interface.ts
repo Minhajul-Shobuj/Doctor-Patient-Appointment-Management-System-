@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import { Types } from 'mongoose';
 
 export type IAppointment = {
   doctorId: Types.ObjectId;
@@ -9,5 +9,5 @@ export type IAppointment = {
     start: string;
     end: string;
   };
-  status: "pending" | "accepted" | "cancelled" | "completed";
+  status: 'pending' | 'accepted' | 'cancelled' | 'completed';
 };

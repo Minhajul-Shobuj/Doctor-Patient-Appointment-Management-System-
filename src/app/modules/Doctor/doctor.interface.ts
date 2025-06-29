@@ -3,7 +3,7 @@ export type IDoctor = {
   email: string;
   phone: string;
   age: number;
-  gender: "male" | "female" | "other";
+  gender: 'male' | 'female' | 'other';
   password: string;
   specialization: string;
   hospitalName: string;

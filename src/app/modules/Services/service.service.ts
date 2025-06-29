@@ -1,6 +1,6 @@
-import { Doctor } from "../Doctor/doctor.model";
-import { IService } from "./service.interface";
-import { Service } from "./service.model";
+import { Doctor } from '../Doctor/doctor.model';
+import { IService } from './service.interface';
+import { Service } from './service.model';
 
 const addService = async (payload: IService, doctorEmail: string) => {
   const doctorData = await Doctor.findOne({
@@ -24,11 +24,7 @@ const getMyServices = async (doctorEmail: string) => {
   return result;
 };
 
-const updateService = async (
-  id: string,
-  payload: Partial<IService>,
-  doctorEmail: string
-) => {
+const updateService = async (id: string, payload: Partial<IService>, doctorEmail: string) => {
   const doctorData = await Doctor.findOne({
     email: doctorEmail,
   });
@@ -40,10 +36,10 @@ const updateService = async (
     payload,
     {
       new: true,
-    }
+    },
   );
   if (!updateService) {
-    throw new Error("Service not found");
+    throw new Error('Service not found');
   }
   return updateService;
 };
@@ -57,7 +53,7 @@ const deleteService = async (id: string, doctorEmail: string) => {
     _id: id,
   });
   if (!deleteService) {
-    throw new Error("Service not found");
+    throw new Error('Service not found');
   }
   return deleteService;
 };

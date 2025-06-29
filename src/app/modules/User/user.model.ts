@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-import { TUser } from "./user.interface";
+import { Schema, model } from 'mongoose';
+import { TUser } from './user.interface';
 
 const UserSchema = new Schema<TUser>(
   {
@@ -13,20 +13,20 @@ const UserSchema = new Schema<TUser>(
     },
     phone: { type: String, unique: true, required: true },
     age: { type: Number, required: true },
-    gender: { type: String, enum: ["male", "female", "other"], required: true },
+    gender: { type: String, enum: ['male', 'female', 'other'], required: true },
     password: {
       type: String,
       required: true,
     },
     role: {
       type: String,
-      enum: ["user", "admin", "superAdmin", "doctor"],
-      default: "user",
+      enum: ['user', 'admin', 'superAdmin', 'doctor'],
+      default: 'user',
     },
     status: {
       type: String,
-      enum: ["active", "blocked"],
-      default: "active",
+      enum: ['active', 'blocked'],
+      default: 'active',
     },
     isActive: {
       type: Boolean,
@@ -39,7 +39,7 @@ const UserSchema = new Schema<TUser>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
-export const User = model<TUser>("User", UserSchema);
+export const User = model<TUser>('User', UserSchema);

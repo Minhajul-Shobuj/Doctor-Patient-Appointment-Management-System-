@@ -1,7 +1,7 @@
-import status from "http-status";
-import catchAsync from "../../utils/catchAsync";
-import sendResponse from "../../utils/sendResponse";
-import { ServiceService } from "./service.service";
+import status from 'http-status';
+import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
+import { ServiceService } from './service.service';
 
 const addService = catchAsync(async (req, res) => {
   const user = req.user;
@@ -9,7 +9,7 @@ const addService = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: status.CREATED,
     success: true,
-    message: "Service added successfully",
+    message: 'Service added successfully',
     data: result,
   });
 });
@@ -19,22 +19,18 @@ const getMyServices = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
-    message: "Services retrieved successfully",
+    message: 'Services retrieved successfully',
     data: result,
   });
 });
 
 const updateService = catchAsync(async (req, res) => {
   const user = req.user;
-  const result = await ServiceService.updateService(
-    req.params.id,
-    req.body,
-    user?.email
-  );
+  const result = await ServiceService.updateService(req.params.id, req.body, user?.email);
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
-    message: "Service updated successfully",
+    message: 'Service updated successfully',
     data: result,
   });
 });
@@ -45,7 +41,7 @@ const deleteService = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: status.OK,
     success: true,
-    message: "Service deleted successfully",
+    message: 'Service deleted successfully',
     data: result,
   });
 });

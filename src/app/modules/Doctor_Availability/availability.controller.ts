@@ -1,18 +1,15 @@
-import status from "http-status";
-import catchAsync from "../../utils/catchAsync";
-import sendResponse from "../../utils/sendResponse";
-import { AvailabilityService } from "./availability.service";
+import status from 'http-status';
+import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
+import { AvailabilityService } from './availability.service';
 
 const setAvailability = catchAsync(async (req, res) => {
   const user = req.user;
-  const result = await AvailabilityService.setAvailability(
-    req.body,
-    user?.email
-  );
+  const result = await AvailabilityService.setAvailability(req.body, user?.email);
   sendResponse(res, {
     statusCode: status.CREATED,
     success: true,
-    message: "Availability set successfully",
+    message: 'Availability set successfully',
     data: result,
   });
 });

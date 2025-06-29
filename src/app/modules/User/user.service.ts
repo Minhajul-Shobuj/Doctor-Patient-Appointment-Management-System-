@@ -1,16 +1,14 @@
-import mongoose from "mongoose";
-import config from "../../config";
-import { IDoctor } from "../Doctor/doctor.interface";
-import bcrypt from "bcrypt";
-import { User } from "./user.model";
-import { Doctor } from "../Doctor/doctor.model";
-import { TUser } from "./user.interface";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import mongoose from 'mongoose';
+import config from '../../config';
+import { IDoctor } from '../Doctor/doctor.interface';
+import bcrypt from 'bcrypt';
+import { User } from './user.model';
+import { Doctor } from '../Doctor/doctor.model';
+import { TUser } from './user.interface';
 
 const createUser = async (payload: TUser) => {
-  const hashedPassword = await bcrypt.hash(
-    payload.password,
-    Number(config.bcrypt_salt_rounds)
-  );
+  const hashedPassword = await bcrypt.hash(payload.password, Number(config.bcrypt_salt_rounds));
   const result = await User.create({
     ...payload,
     password: hashedPassword,
@@ -26,10 +24,7 @@ const createDoctor = async (payload: IDoctor) => {
     session.startTransaction();
 
     // Hash password
-    const hashedPassword = await bcrypt.hash(
-      payload.password,
-      Number(config.bcrypt_salt_rounds)
-    );
+    const hashedPassword = await bcrypt.hash(payload.password, Number(config.bcrypt_salt_rounds));
 
     // Create user record
     const userData = {
@@ -39,11 +34,11 @@ const createDoctor = async (payload: IDoctor) => {
       age: payload.age,
       gender: payload.gender,
       password: hashedPassword,
-      role: "doctor",
+      role: 'doctor',
     };
     const newUser = await User.create([userData], { session });
     if (!newUser || !newUser[0]?._id) {
-      throw new Error("Failed to create user");
+      throw new Error('Failed to create user');
     }
 
     // Create doctor record linked to user
@@ -53,20 +48,18 @@ const createDoctor = async (payload: IDoctor) => {
     };
     const newDoctor = await Doctor.create([doctorData], { session });
     if (!newDoctor) {
-      throw new Error("Failed to create doctor");
+      throw new Error('Failed to create doctor');
     }
 
     await session.commitTransaction();
     session.endSession();
 
-    const { password: userPassword, ...userWithoutPassword } =
-      newUser[0].toObject();
-    const { password: doctorPassword, ...doctorWithoutPassword } =
-      newDoctor[0].toObject();
+    const { password: userPassword, ...userWithoutPassword } = newUser[0].toObject();
+    const { password: doctorPassword, ...doctorWithoutPassword } = newDoctor[0].toObject();
 
     return {
       success: true,
-      message: "Doctor created successfully",
+      message: 'Doctor created successfully',
       data: {
         user: userWithoutPassword,
         doctor: doctorWithoutPassword,

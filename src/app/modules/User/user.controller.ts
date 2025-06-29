@@ -1,13 +1,13 @@
-import catchAsync from "../../utils/catchAsync";
-import sendResponse from "../../utils/sendResponse";
-import { UserService } from "./user.service";
+import catchAsync from '../../utils/catchAsync';
+import sendResponse from '../../utils/sendResponse';
+import { UserService } from './user.service';
 
 const createUser = catchAsync(async (req, res) => {
   const result = await UserService.createUser(req.body);
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: "User created successfully",
+    message: 'User created successfully',
     data: result,
   });
 });
@@ -17,7 +17,7 @@ const createDoctor = catchAsync(async (req, res) => {
   sendResponse(res, {
     statusCode: 200,
     success: true,
-    message: "Doctor created successfully",
+    message: 'Doctor created successfully',
     data: result,
   });
 });

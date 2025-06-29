@@ -1,8 +1,8 @@
-import { User } from "../User/user.model";
+import { User } from '../User/user.model';
 
 export const getDayNameFromDate = (dateStr: string): string => {
   const date = new Date(dateStr);
-  return date.toLocaleDateString("en-US", { weekday: "long" });
+  return date.toLocaleDateString('en-US', { weekday: 'long' });
 };
 
 export const getUserId = async (userEmail: string) => {
