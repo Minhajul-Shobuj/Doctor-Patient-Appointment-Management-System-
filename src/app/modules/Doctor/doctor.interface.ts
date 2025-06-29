@@ -9,3 +9,9 @@ export type IDoctor = {
   hospitalName: string;
   hospitalFloor: string;
 };
+
+export type DoctorFilters = {
+  hospitalName?: string;
+  specialization?: string;
+  serviceName?: string;
+};

@@ -1,8 +1,23 @@
 import mongoose from "mongoose";
 import { Doctor } from "./doctor.model";
+import { DoctorFilters } from "./doctor.interface";
 
-const getAllDoctors = async () => {
+const getAllDoctors = async (filters: DoctorFilters) => {
+  const { hospitalName, specialization, serviceName } = filters;
+  const matchStage: any = {};
+
+  if (hospitalName) {
+    matchStage.hospitalName = { $regex: hospitalName, $options: "i" };
+  }
+
+  if (specialization) {
+    matchStage.specialization = { $regex: specialization, $options: "i" };
+  }
   const doctors = await Doctor.aggregate([
+    // Apply doctor-level filters
+    { $match: matchStage },
+
+    // Join with services
     {
       $lookup: {
         from: "services",
@@ -11,9 +26,34 @@ const getAllDoctors = async () => {
         as: "services",
       },
     },
+
+    // Filter services by name
+    ...(serviceName
+      ? [
+          {
+            $addFields: {
+              services: {
+                $filter: {
+                  input: "$services",
+                  as: "service",
+                  cond: {
+                    $regexMatch: {
+                      input: "$$service.title",
+                      regex: serviceName,
+                      options: "i",
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ]
+      : []),
+
+    // Join with availabilities
     {
       $lookup: {
-        from: "doctorAvailabilities",
+        from: "doctoravailabilities",
         localField: "_id",
         foreignField: "doctorId",
         as: "availabilities",

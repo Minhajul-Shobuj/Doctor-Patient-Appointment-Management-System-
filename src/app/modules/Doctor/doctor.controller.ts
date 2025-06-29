@@ -4,7 +4,13 @@ import sendResponse from "../../utils/sendResponse";
 import { DoctorService } from "./doctor.service";
 
 const getAllDoctors = catchAsync(async (req, res) => {
-  const doctors = await DoctorService.getAllDoctors();
+  const { hospitalName, specialization, serviceName } = req.query;
+  const filters = {
+    ...(hospitalName && { hospitalName: hospitalName.toString() }),
+    ...(specialization && { specialization: specialization.toString() }),
+    ...(serviceName && { serviceName: serviceName.toString() }),
+  };
+  const doctors = await DoctorService.getAllDoctors(filters);
   sendResponse(res, {
     statusCode: 200,
     success: true,
