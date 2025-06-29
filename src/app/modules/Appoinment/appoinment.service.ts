@@ -91,14 +91,14 @@ const updateAppointmentStatus = async (
     );
   }
 
-  // 1. Update appointment status
+  //  Update appointment status
   const updatedAppointment = await Appointment.findByIdAndUpdate(
     appointmentId,
     { status: appointmentStatus },
     { new: true }
   );
 
-  // If cancelled → make slot available again
+  // If cancelled , make slot available again
   if (appointmentStatus === "cancelled") {
     const dayName = getDayNameFromDate(appointment.selectedDate);
 
