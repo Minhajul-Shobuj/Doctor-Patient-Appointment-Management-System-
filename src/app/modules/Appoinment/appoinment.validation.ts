@@ -14,7 +14,7 @@ const createAppointmentValidation = z.object({
 
 const updateAppointmentStatusValidation = z.object({
   body: z.object({
-    appointmentStatus: z.enum(["accepted", "cancelled", "completed"]),
+    status: z.enum(["accepted", "cancelled", "completed"]),
   }),
 });
 

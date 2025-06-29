@@ -1,4 +1,4 @@
-import status from "http-status";
+import httpStatus from "http-status";
 import catchAsync from "../../utils/catchAsync";
 import sendResponse from "../../utils/sendResponse";
 import { AppointmentService } from "./appoinment.service";
@@ -8,7 +8,7 @@ const createAppointment = catchAsync(async (req, res) => {
   const userId = await getUserId(req.user.email);
   const result = await AppointmentService.createAppointment(req.body, userId!);
   sendResponse(res, {
-    statusCode: status.CREATED,
+    statusCode: httpStatus.CREATED,
     success: true,
     message: "Appointment created successfully",
     data: result,
@@ -19,7 +19,7 @@ const getAppointmentsByUser = catchAsync(async (req, res) => {
   const userId = await getUserId(req.user.email);
   const result = await AppointmentService.getAppointmentsByUser(userId!);
   sendResponse(res, {
-    statusCode: status.OK,
+    statusCode: httpStatus.OK,
     success: true,
     message: "Appointments fetched successfully",
     data: result,
@@ -27,10 +27,11 @@ const getAppointmentsByUser = catchAsync(async (req, res) => {
 });
 
 const getAppointmentsByDoctor = catchAsync(async (req, res) => {
-  const doctorId = await getUserId(req.user?.email);
-  const result = await AppointmentService.getAppointmentsByDoctor(doctorId!);
+  const result = await AppointmentService.getAppointmentsByDoctor(
+    req.user?.email
+  );
   sendResponse(res, {
-    statusCode: status.OK,
+    statusCode: httpStatus.OK,
     success: true,
     message: "Appointments fetched successfully",
     data: result,
@@ -38,15 +39,14 @@ const getAppointmentsByDoctor = catchAsync(async (req, res) => {
 });
 
 const updateAppointmentStatus = catchAsync(async (req, res) => {
-  const { appointmentStatus } = req.body;
-  const doctorId = await getUserId(req.user?.email);
+  const { status } = req.body;
   const result = await AppointmentService.updateAppointmentStatus(
     req.params.id,
-    doctorId!,
-    appointmentStatus
+    req.user?.email,
+    status
   );
   sendResponse(res, {
-    statusCode: status.OK,
+    statusCode: httpStatus.OK,
     success: true,
     message: "Appointment status updated successfully",
     data: result,

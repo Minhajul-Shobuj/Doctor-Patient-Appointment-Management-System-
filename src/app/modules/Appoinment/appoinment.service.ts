@@ -6,6 +6,7 @@ import { DoctorAvailability } from "../Doctor_Availability/availability.model";
 import { getDayNameFromDate } from "./appionment.utils";
 import AppError from "../../errors/AppError";
 import status from "http-status";
+import { Doctor } from "../Doctor/doctor.model";
 
 const createAppointment = async (payload: IAppointment, userId: string) => {
   const { doctorId, serviceId, selectedDate, timeSlot } = payload;
@@ -70,21 +71,23 @@ const getAppointmentsByUser = async (userId: string) => {
     .populate("serviceId");
 };
 
-const getAppointmentsByDoctor = async (doctorId: string) => {
-  return await Appointment.find({ doctorId });
+const getAppointmentsByDoctor = async (doctorEmail: string) => {
+  const doctor = await Doctor.findOne({ email: doctorEmail });
+  return await Appointment.find({ doctorId: doctor?._id });
 };
 
 const updateAppointmentStatus = async (
   appointmentId: string,
-  doctorId: string,
+  doctorEmail: string,
   appointmentStatus: string
 ) => {
+  const doctor = await Doctor.findOne({ email: doctorEmail });
   const appointment = await Appointment.findById(appointmentId);
   if (!appointment) {
     throw new AppError(status.NOT_FOUND, "Appointment not found");
   }
 
-  if (appointment.doctorId.toString() !== doctorId) {
+  if (appointment.doctorId.toString() !== doctor?._id.toString()) {
     throw new AppError(
       status.UNAUTHORIZED,
       "You are not authorized to update this appointment"
@@ -104,7 +107,7 @@ const updateAppointmentStatus = async (
 
     await DoctorAvailability.updateOne(
       {
-        doctorId: new mongoose.Types.ObjectId(doctorId),
+        doctorId: new mongoose.Types.ObjectId(doctor._id),
         serviceId: new mongoose.Types.ObjectId(appointment.serviceId),
         day: dayName,
       },
