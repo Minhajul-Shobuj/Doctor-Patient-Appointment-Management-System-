@@ -3,8 +3,9 @@ import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { AppointmentService } from './appoinment.service';
 import { getUserId } from './appionment.utils';
+import { RequestHandler } from 'express';
 
-const createAppointment = catchAsync(async (req, res) => {
+const createAppointment: RequestHandler = catchAsync(async (req, res) => {
   const userId = await getUserId(req.user.email);
   const result = await AppointmentService.createAppointment(req.body, userId!);
   sendResponse(res, {
@@ -15,7 +16,7 @@ const createAppointment = catchAsync(async (req, res) => {
   });
 });
 
-const getAppointmentsByUser = catchAsync(async (req, res) => {
+const getAppointmentsByUser: RequestHandler = catchAsync(async (req, res) => {
   const userId = await getUserId(req.user.email);
   const result = await AppointmentService.getAppointmentsByUser(userId!);
   sendResponse(res, {
@@ -26,7 +27,7 @@ const getAppointmentsByUser = catchAsync(async (req, res) => {
   });
 });
 
-const getAppointmentsByDoctor = catchAsync(async (req, res) => {
+const getAppointmentsByDoctor: RequestHandler = catchAsync(async (req, res) => {
   const result = await AppointmentService.getAppointmentsByDoctor(req.user?.email);
   sendResponse(res, {
     statusCode: httpStatus.OK,
@@ -36,7 +37,7 @@ const getAppointmentsByDoctor = catchAsync(async (req, res) => {
   });
 });
 
-const updateAppointmentStatus = catchAsync(async (req, res) => {
+const updateAppointmentStatus: RequestHandler = catchAsync(async (req, res) => {
   const { status } = req.body;
   const result = await AppointmentService.updateAppointmentStatus(
     req.params.id,

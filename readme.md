@@ -4,6 +4,12 @@ A full-featured backend REST API for managing doctor registrations, patient appo
 
 ---
 
+## 🚀 Live Demo
+
+🌐 [Click here to view the live version](https://doctor-tec.vercel.app)
+
+---
+
 ## 🚀 Features
 
 ### 👨‍⚕️ Doctor Module

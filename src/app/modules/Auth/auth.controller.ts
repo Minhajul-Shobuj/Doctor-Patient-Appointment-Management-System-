@@ -3,8 +3,9 @@ import config from '../../config';
 import { AuthServices } from './auth.service';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
+import { RequestHandler } from 'express';
 
-const loginUser = catchAsync(async (req, res) => {
+const loginUser: RequestHandler = catchAsync(async (req, res) => {
   const result = await AuthServices.loginUser(req.body);
   const { refreshToken, accessToken } = result;
 
@@ -23,7 +24,7 @@ const loginUser = catchAsync(async (req, res) => {
   });
 });
 
-const refreshToken = catchAsync(async (req, res) => {
+const refreshToken: RequestHandler = catchAsync(async (req, res) => {
   const { refreshToken } = req.cookies;
   const result = await AuthServices.refreshToken(refreshToken);
 

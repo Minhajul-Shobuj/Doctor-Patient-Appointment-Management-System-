@@ -2,8 +2,9 @@ import status from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { ServiceService } from './service.service';
+import { RequestHandler } from 'express';
 
-const addService = catchAsync(async (req, res) => {
+const addService: RequestHandler = catchAsync(async (req, res) => {
   const user = req.user;
   const result = await ServiceService.addService(req.body, user?.email);
   sendResponse(res, {
@@ -13,7 +14,7 @@ const addService = catchAsync(async (req, res) => {
     data: result,
   });
 });
-const getMyServices = catchAsync(async (req, res) => {
+const getMyServices: RequestHandler = catchAsync(async (req, res) => {
   const user = req.user;
   const result = await ServiceService.getMyServices(user?.email);
   sendResponse(res, {
@@ -24,7 +25,7 @@ const getMyServices = catchAsync(async (req, res) => {
   });
 });
 
-const updateService = catchAsync(async (req, res) => {
+const updateService: RequestHandler = catchAsync(async (req, res) => {
   const user = req.user;
   const result = await ServiceService.updateService(req.params.id, req.body, user?.email);
   sendResponse(res, {
@@ -35,7 +36,7 @@ const updateService = catchAsync(async (req, res) => {
   });
 });
 
-const deleteService = catchAsync(async (req, res) => {
+const deleteService: RequestHandler = catchAsync(async (req, res) => {
   const user = req.user;
   const result = await ServiceService.deleteService(req.params.id, user?.email);
   sendResponse(res, {

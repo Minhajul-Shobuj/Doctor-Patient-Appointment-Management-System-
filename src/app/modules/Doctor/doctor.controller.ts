@@ -2,8 +2,9 @@ import status from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
 import { DoctorService } from './doctor.service';
+import { RequestHandler } from 'express';
 
-const getAllDoctors = catchAsync(async (req, res) => {
+const getAllDoctors: RequestHandler = catchAsync(async (req, res) => {
   const { hospitalName, specialization, serviceName } = req.query;
   const filters = {
     ...(hospitalName && { hospitalName: hospitalName.toString() }),
@@ -19,7 +20,7 @@ const getAllDoctors = catchAsync(async (req, res) => {
   });
 });
 
-const getDoctorById = catchAsync(async (req, res) => {
+const getDoctorById: RequestHandler = catchAsync(async (req, res) => {
   const { id } = req.params;
   const doctor = await DoctorService.getDoctorById(id);
   sendResponse(res, {
