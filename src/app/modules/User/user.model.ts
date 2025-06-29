@@ -11,7 +11,7 @@ const UserSchema = new Schema<TUser>(
       lowercase: true,
       trim: true,
     },
-    phone: { type: String, required: true },
+    phone: { type: String, unique: true, required: true },
     age: { type: Number, required: true },
     gender: { type: String, enum: ["male", "female", "other"], required: true },
     password: {

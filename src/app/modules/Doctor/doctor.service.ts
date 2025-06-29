@@ -44,7 +44,7 @@ const getDoctorById = async (id: string) => {
     },
     {
       $lookup: {
-        from: "availabilities",
+        from: "doctoravailabilities",
         localField: "_id",
         foreignField: "doctorId",
         as: "availabilities",

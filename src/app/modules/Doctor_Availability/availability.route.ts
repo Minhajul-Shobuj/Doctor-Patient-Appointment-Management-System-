@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post(
   "/availability",
-  auth("Doctor"),
+  auth("doctor"),
   validateRequest(AvailabilityValidation.availabilitySchema),
   AvailabilityController.setAvailability
 );
