@@ -13,6 +13,16 @@ const addService = catchAsync(async (req, res) => {
     data: result,
   });
 });
+const getMyServices = catchAsync(async (req, res) => {
+  const user = req.user;
+  const result = await ServiceService.getMyServices(user?.email);
+  sendResponse(res, {
+    statusCode: status.OK,
+    success: true,
+    message: "Services retrieved successfully",
+    data: result,
+  });
+});
 
 const updateService = catchAsync(async (req, res) => {
   const user = req.user;
@@ -44,4 +54,5 @@ export const ServiceController = {
   addService,
   updateService,
   deleteService,
+  getMyServices,
 };

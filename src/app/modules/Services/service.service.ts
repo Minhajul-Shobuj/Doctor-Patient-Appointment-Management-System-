@@ -14,6 +14,16 @@ const addService = async (payload: IService, doctorEmail: string) => {
   return result;
 };
 
+const getMyServices = async (doctorEmail: string) => {
+  const doctorData = await Doctor.findOne({
+    email: doctorEmail,
+  });
+  const result = await Service.find({
+    doctorId: doctorData?._id,
+  });
+  return result;
+};
+
 const updateService = async (
   id: string,
   payload: Partial<IService>,
@@ -56,4 +66,5 @@ export const ServiceService = {
   addService,
   updateService,
   deleteService,
+  getMyServices,
 };

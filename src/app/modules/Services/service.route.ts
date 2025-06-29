@@ -12,6 +12,7 @@ router.post(
   validateRequest(ServiceValidation.careateServiceSchema),
   ServiceController.addService
 );
+router.get("/services", auth("doctor"), ServiceController.getMyServices);
 
 router.patch(
   "/services/:id",
