@@ -1,0 +1,501 @@
+{
+	"info": {
+		"_postman_id": "c4a7acda-c957-4e61-8f68-172892c236a3",
+		"name": "Dr.Tech",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39821222"
+	},
+	"item": [
+		{
+			"name": "register-doctor",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Dr. Samin Rahman\",\r\n    \"email\": \"samin.rahman@example.com\",\r\n    \"age\":\"35\",\r\n    \"gender\":\"male\",\r\n    \"phone\": \"01712345670\",\r\n    \"password\": \"securePass123\",\r\n    \"specialization\": \"Cardiology\",\r\n    \"hospitalName\": \"Dhaka Medical College Hospital\",\r\n    \"hospitalFloor\": \"3rd Floor\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/auth/register-doctor",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"register-doctor"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register-user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Md Minhajul\",\r\n    \"email\": \"Minhajul@example.com\",\r\n    \"phone\": \"01712345670\",\r\n    \"password\": \"securePass123\",\r\n    \"age\": 25,\r\n    \"gender\": \"male\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/auth/register-user",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"register-user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-service",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5ZXNoYS5yYWhtYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiZG9jdG9yIiwiaWF0IjoxNzUxMTc5Nzk0LCJleHAiOjE3NTIwNDM3OTR9.GF9r3mg9DO-82_ux8YIDm5rN2eqwTVd83gcn-tfgcLo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Heart Checkup\",\r\n    \"description\": \"Comprehensive cardiac examination including ECG and blood pressure analysis.\",\r\n    \"price\": 1500,\r\n    \"duration\": 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/doctor/services",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"doctor",
+						"services"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-my-service",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5ZXNoYS5yYWhtYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiZG9jdG9yIiwiaWF0IjoxNzUxMTc5Nzk0LCJleHAiOjE3NTIwNDM3OTR9.GF9r3mg9DO-82_ux8YIDm5rN2eqwTVd83gcn-tfgcLo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Heart Checkup\",\r\n    \"description\": \"Comprehensive cardiac examination including ECG and blood pressure analysis.\",\r\n    \"price\": 1500,\r\n    \"duration\": 30\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/doctor/services",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"doctor",
+						"services"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "edit-service",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5ZXNoYS5yYWhtYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiZG9jdG9yIiwiaWF0IjoxNzUxMTc5Nzk0LCJleHAiOjE3NTIwNDM3OTR9.GF9r3mg9DO-82_ux8YIDm5rN2eqwTVd83gcn-tfgcLo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Brain Checking\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/doctor/services/6860e36679234d36862764c1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"doctor",
+						"services",
+						"6860e36679234d36862764c1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete-service",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5ZXNoYS5yYWhtYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiZG9jdG9yIiwiaWF0IjoxNzUxMTc5Nzk0LCJleHAiOjE3NTIwNDM3OTR9.GF9r3mg9DO-82_ux8YIDm5rN2eqwTVd83gcn-tfgcLo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Brain Checking\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/doctor/services/6860e36679234d36862764c1",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"doctor",
+						"services",
+						"6860e36679234d36862764c1"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"ayesha.rahman@example.com\",\r\n    \"password\": \"securePass123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/auth/login",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get All Doctors",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"samin.rahman@example.com\",\r\n    \"password\": \"securePass123\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:5000/doctors",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"doctors"
+					],
+					"query": [
+						{
+							"key": "hospitalName",
+							"value": "Rangpur",
+							"disabled": true
+						},
+						{
+							"key": "specialization",
+							"value": "cardio",
+							"disabled": true
+						},
+						{
+							"key": "serviceName",
+							"value": "heart checkup",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get Doctors by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:5000/doctors/685fef1dd3dfb2010406defd",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"doctors",
+						"685fef1dd3dfb2010406defd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "set dr. availability",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5ZXNoYS5yYWhtYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiZG9jdG9yIiwiaWF0IjoxNzUxMTc5Nzk0LCJleHAiOjE3NTIwNDM3OTR9.GF9r3mg9DO-82_ux8YIDm5rN2eqwTVd83gcn-tfgcLo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"serviceId\": \"6860e36679234d36862764c1\",\r\n    \"day\": \"Monday\",\r\n    \"timeSlots\": [\r\n        {\r\n            \"start\": \"10:00 AM\",\r\n            \"end\": \"12:00 PM\"\r\n        },\r\n        {\r\n            \"start\": \"4:00 PM\",\r\n            \"end\": \"6:00 PM\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/doctor/availability",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"doctor",
+						"availability"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book appointment",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pbmhhanVsQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTExODA2NDEsImV4cCI6MTc1MjA0NDY0MX0.zxNGwUFRwVXCwueLO3umNleFgalW-CyqwOFd56mc_gI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"doctorId\": \"685fef1dd3dfb2010406defd\",\r\n  \"serviceId\": \"6860e36679234d36862764c1\",\r\n  \"selectedDate\": \"2025-07-03\",\r\n  \"timeSlot\": {\r\n    \"start\": \"10:00 AM\",\r\n    \"end\": \"11:00 AM\"\r\n  }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/appointments",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"appointments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get my appointment",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1pbmhhanVsQGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3NTExODA2NDEsImV4cCI6MTc1MjA0NDY0MX0.zxNGwUFRwVXCwueLO3umNleFgalW-CyqwOFd56mc_gI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/patient/appointments",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"patient",
+						"appointments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get appointment by doctor",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5ZXNoYS5yYWhtYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiZG9jdG9yIiwiaWF0IjoxNzUxMTgwODA4LCJleHAiOjE3NTIwNDQ4MDh9.NQvg7hDPbg9rdjB1vcvyYIqKJrK_jq37_RDGgNkE3Fs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/doctor/appointments",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"doctor",
+						"appointments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "set appointment status",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF5ZXNoYS5yYWhtYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiZG9jdG9yIiwiaWF0IjoxNzUxMTgwODA4LCJleHAiOjE3NTIwNDQ4MDh9.NQvg7hDPbg9rdjB1vcvyYIqKJrK_jq37_RDGgNkE3Fs",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\":\"cancelled\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:5000/doctor/appointments/6860e56ed34f25468c6d7d1e/status",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"doctor",
+						"appointments",
+						"6860e56ed34f25468c6d7d1e",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
